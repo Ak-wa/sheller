@@ -2,8 +2,10 @@
 import sys
 from os import system
 import argparse
+import netifaces as ni
 parser = argparse.ArgumentParser()
 parser.add_argument('-d', help="IP address to connect to", dest="ip", required=False)
+parser.add_argument('-i', help="Interface to get IP from", dest="interface", required=False)
 parser.add_argument('-p', help="Port to connect to", dest="port", required=False)
 parser.add_argument('-alias',dest="alias",help="Installs Sheller on your system with an alias",action="store_true",required=False)
 args = parser.parse_args()
@@ -43,6 +45,12 @@ def show_ips():
 if len(sys.argv) <= 1:
     print("[+] No arguments supplied, for help try sheller -h")
 
+def main():
+    print("[+] Sheller v.1.1")
+    print("[+] Available Interfaces for -i argument: ")
+    print(ni.interfaces())
+main()
+
 if args.alias:
     print("[+] Creating /usr/share/sheller folder")
     system('mkdir /usr/share/sheller')
@@ -67,4 +75,13 @@ if args.ip:
     else:
         pass
 else:
-    pass
+    if args.interface:
+        if args.port:
+            ip = ni.ifaddresses(args.interface)[ni.AF_INET][0]['addr']
+            py(ip,int(args.port))
+            pl(ip,int(args.port))
+            sh(ip,int(args.port))
+            php(ip,int(args.port))
+            rb(ip,int(args.port))
+            nc(ip,int(args.port))
+            java(ip,int(args.port))
