@@ -62,7 +62,6 @@ if args.ip:
         sh(args.ip,int(args.port))
         php(args.ip,int(args.port))
         rb(args.ip,int(args.port))
-        rb(args.ip,int(args.port))
         nc(args.ip,int(args.port))
         java(args.ip,int(args.port))
     else:
