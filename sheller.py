@@ -46,42 +46,44 @@ if len(sys.argv) <= 1:
     print("[+] No arguments supplied, for help try sheller -h")
 
 def main():
-    print("[+] Sheller v.1.1")
-    print("[+] Available Interfaces for -i argument: ")
-    print(ni.interfaces())
-main()
-
-if args.alias:
-    print("[+] Creating /usr/share/sheller folder")
-    system('mkdir /usr/share/sheller')
-    print("[+] Cloning sheller.py into /usr/share/sheller/sheller.py")
-    system('wget https://raw.githubusercontent.com/Ak-wa/sheller/master/sheller.py -O /usr/share/sheller/sheller.py')
-    print("[+] Setting sheller as alias")
-    alias = "alias sheller='python3 /usr/share/sheller/sheller.py'"
-    system("%s > ~/.bashrc" % alias)
-    print("[+] Done, now you can call sheller everywhere!")
-else:
-    pass
-
-if args.ip:
-    if args.port:
-        py(args.ip,int(args.port))
-        pl(args.ip,int(args.port))
-        sh(args.ip,int(args.port))
-        php(args.ip,int(args.port))
-        rb(args.ip,int(args.port))
-        nc(args.ip,int(args.port))
-        java(args.ip,int(args.port))
+    print("[+] Available Interfaces (-i for interface, -d for ip)")
+    interfaces = ni.interfaces()
+    for interface in interfaces:
+        print("%s : %s" % (interface, ni.ifaddresses(interface)[ni.AF_INET][0]['addr']))
+    if args.alias:
+        print("[+] Creating /usr/share/sheller folder")
+        system('mkdir /usr/share/sheller')
+        print("[+] Cloning sheller.py into /usr/share/sheller/sheller.py")
+        system('wget https://raw.githubusercontent.com/Ak-wa/sheller/master/sheller.py -O /usr/share/sheller/sheller.py')
+        print("[+] Setting sheller as alias")
+        alias = "alias sheller='python3 /usr/share/sheller/sheller.py'"
+        system("%s > ~/.bashrc" % alias)
+        print("[+] Done, now you can call sheller everywhere!")
     else:
         pass
-else:
-    if args.interface:
+    if args.ip:
         if args.port:
-            ip = ni.ifaddresses(args.interface)[ni.AF_INET][0]['addr']
-            py(ip,int(args.port))
-            pl(ip,int(args.port))
-            sh(ip,int(args.port))
-            php(ip,int(args.port))
-            rb(ip,int(args.port))
-            nc(ip,int(args.port))
-            java(ip,int(args.port))
+            py(args.ip,int(args.port))
+            pl(args.ip,int(args.port))
+            sh(args.ip,int(args.port))
+            php(args.ip,int(args.port))
+            rb(args.ip,int(args.port))
+            nc(args.ip,int(args.port))
+            java(args.ip,int(args.port))
+        else:
+            pass
+    else:
+        if args.interface:
+            if args.port:
+                ip = ni.ifaddresses(args.interface)[ni.AF_INET][0]['addr']
+                py(ip,int(args.port))
+                pl(ip,int(args.port))
+                sh(ip,int(args.port))
+                php(ip,int(args.port))
+                rb(ip,int(args.port))
+                nc(ip,int(args.port))
+                java(ip,int(args.port))
+main()
+
+
+
