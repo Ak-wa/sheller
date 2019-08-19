@@ -4,7 +4,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument('-d', help="IP address to connect to", dest="ip", required=False)
 parser.add_argument('-p', help="Port to connect to", dest="port", required=False)
-parser.add_argument('-alias',dest=alias,help="Installs Sheller on your system with an alias",action="store_true",required=False)
+parser.add_argument('-alias',dest="alias",help="Installs Sheller on your system with an alias",action="store_true",required=False)
 args = parser.parse_args()
 def py(ip, port):
     print("[+] Python")
@@ -39,6 +39,18 @@ def show_ips():
     print("[+] IPs you may want to use: ")
     system("""ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'""")
 
+if args.alias:
+    print("[+] Creating /usr/share/sheller folder")
+    system('mkdir /usr/share/sheller')
+    print("[+] Cloning sheller.py into /usr/share/sheller/sheller.py")
+    system('wget https://raw.githubusercontent.com/Ak-wa/sheller/master/sheller.py -O /usr/share/sheller/sheller.py')
+    print("[+] Setting sheller as alias")
+    alias = "alias sheller='python3 /usr/share/sheller/sheller.py'"
+    system("%s > ~/.bashrc" % alias)
+    print("[+] Done, now you can call sheller everywhere!")
+else:
+    pass
+
 if args.ip:
     if args.port:
         py(args.ip,int(args.port))
@@ -50,7 +62,6 @@ if args.ip:
         nc(args.ip,int(args.port))
         java(args.ip,int(args.port))
     else:
-        if args.alias:
-            system('wget 
+        pass
 else:
     pass
