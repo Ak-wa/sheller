@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+import sys
 from os import system
 import argparse
 parser = argparse.ArgumentParser()
@@ -38,6 +39,9 @@ def java(ip, port):
 def show_ips():
     print("[+] IPs you may want to use: ")
     system("""ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'""")
+
+if len(sys.argv) <= 1:
+    print("[+] No arguments supplied, for help try sheller -h")
 
 if args.alias:
     print("[+] Creating /usr/share/sheller folder")
