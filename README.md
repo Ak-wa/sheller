@@ -1,5 +1,13 @@
-# sheller - Reverse-Shell payload generator
-Reverse Shell Payload Generator  
+# sheller - Reverse-Shell Payload Generator
+A small and simple script for pentesters, lets you easily get the payload for your remote shell.
+Supports (yet):
+* Python
+* Perl
+* Bash
+* PHP
+* Ruby
+* Netcat
+* Java
 
 ![python](https://img.shields.io/pypi/pyversions/Django.svg)
 ![size](https://img.shields.io/github/size/ak-wa/sheller/sheller.py.svg)
