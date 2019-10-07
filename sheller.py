@@ -73,6 +73,7 @@ def main():
                 if snic.family == family:
                     yield (interface, snic.address)
     ipv4s = list(get_ip_addresses(socket.AF_INET))
+    print(ipv4s)
     ipv6s = list(get_ip_addresses(socket.AF_INET6))
     for ip in ipv4s:
         print(ip)
@@ -102,14 +103,21 @@ def main():
     else:
         if args.interface:
             if args.port:
-                ip = ni.ifaddresses(args.interface)[ni.AF_INET][0]['addr']
-                py(ip, int(args.port))
-                pl(ip, int(args.port))
-                sh(ip, int(args.port))
-                php(ip, int(args.port))
-                rb(ip, int(args.port))
-                nc(ip, int(args.port))
-                java(ip, int(args.port))
+                for tuple in ipv4s:
+                    if str(args.interface) == str(tuple[0]):
+                        ip = tuple[1]
+                    else:
+                        pass
+                try:
+                    py(ip, int(args.port))
+                    pl(ip, int(args.port))
+                    sh(ip, int(args.port))
+                    php(ip, int(args.port))
+                    rb(ip, int(args.port))
+                    nc(ip, int(args.port))
+                    java(ip, int(args.port))
+                except:
+                    print("[+] Could not find the provided interface")
 
 
 main()
