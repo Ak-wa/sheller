@@ -83,9 +83,9 @@ def main():
         system(
             'wget https://raw.githubusercontent.com/Ak-wa/sheller/master/sheller.py -O /usr/share/sheller/sheller.py')
         print("[+] Setting sheller as alias")
-        alias = "alias sheller='python3 /usr/share/sheller/sheller.py'"
-        system("%s > ~/.bashrc" % alias)
-        print("[+] Done, now you can call sheller everywhere!")
+        alias = 'alias sheller="python3 /usr/share/sheller/sheller.py"'
+        system("echo '%s' >> ~/.bash_aliases" % alias)
+        print("[+] Done, restart your terminal to use sheller from anywhere!")
     else:
         pass
     if args.ip:
