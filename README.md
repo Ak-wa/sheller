@@ -28,7 +28,10 @@ sheller -i eth0 -p 1337
 # ^ Creates payloads for interface eth0 & Port 1337
 
 sheller -d 10.10.14.13 -p 4444
-# ^ Creates payloads for IP 10.10.14.13 & Port 1337
+# ^ Creates payloads for IP 10.10.14.13 & Port 1337   
+
+sheller -i eth0 -p 1339 | grep python   
+# ^ Shows only python payload
 ```
 
 
