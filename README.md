@@ -7,7 +7,24 @@ Supports (yet):
 * PHP
 * Ruby
 * Netcat
-* Java
+* Java   
+
+## Usage & Examples   
+Without symlink:   
+```
+python3 sheller.py --help
+python3 sheller.py -setup  # Will create the symlink
+```   
+
+With symlink:   
+
+```
+sheller -i eth0 -p 1337
+# ^ Creates payloads for interface eth0 & Port 1337
+
+sheller -d 10.10.14.13 -p 4444
+# ^ Creates payloads for IP 10.10.14.13 & Port 1337
+```
 
 ![python](https://img.shields.io/pypi/pyversions/Django.svg)
 ![size](https://img.shields.io/github/size/ak-wa/sheller/sheller.py.svg)
