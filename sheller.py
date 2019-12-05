@@ -64,16 +64,12 @@ if len(sys.argv) <= 1:
 
 def main():
     print("[+] Available Interfaces (-i for interface, -d for ip)")
-#    interfaces = ni.interfaces()
-#    for interface in interfaces:
-#        print("%s : %s" % (interface, ni.ifaddresses(interface)[ni.AF_INET][0]['addr']))
     def get_ip_addresses(family):
         for interface, snics in psutil.net_if_addrs().items():
             for snic in snics:
                 if snic.family == family:
                     yield (interface, snic.address)
     ipv4s = list(get_ip_addresses(socket.AF_INET))
-    print(ipv4s)
     ipv6s = list(get_ip_addresses(socket.AF_INET6))
     for ip in ipv4s:
         print(ip)
