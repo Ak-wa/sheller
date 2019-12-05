@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 import sys
 from os import system
 import argparse
@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-d', help="IP address to connect to", dest="ip", required=False)
 parser.add_argument('-i', help="Interface to get IP from", dest="interface", required=False)
 parser.add_argument('-p', help="Port to connect to", dest="port", required=False)
-parser.add_argument('-alias', dest="alias", help="Installs Sheller on your system with an alias", action="store_true",
+parser.add_argument('-setup', dest="setup", help="Installs Sheller on your system in /usr/bin", action="store_true",
                     required=False)
 args = parser.parse_args()
 
@@ -77,16 +77,17 @@ def main():
     ipv6s = list(get_ip_addresses(socket.AF_INET6))
     for ip in ipv4s:
         print(ip)
-    if args.alias:
-        print("[+] Creating /usr/share/sheller folder")
-        system('mkdir /usr/share/sheller')
-        print("[+] Cloning sheller.py into /usr/share/sheller/sheller.py")
+    if args.setup:
+        print("[+] Creating /usr/bin/sheller folder")
+        system('mkdir /usr/bin/sheller')
+        system('mkdir /usr/bin/sheller/bin')
+        print("[+] Cloning sheller.py into /usr/bin/sheller/bin/sheller")
         system(
-            'wget https://raw.githubusercontent.com/Ak-wa/sheller/master/sheller.py -O /usr/share/sheller/sheller.py')
-        print("[+] Setting sheller as alias")
-        alias = 'alias sheller="python3 /usr/share/sheller/sheller.py"'
-        system("echo '%s' >> ~/.bash_aliases" % alias)
-        print("[+] Done, restart your terminal to use sheller from anywhere!")
+            'wget https://raw.githubusercontent.com/Ak-wa/sheller/master/sheller.py -O /usr/bin/sheller/bin/sheller')
+        system("chmod +x /usr/bin/sheller/bin/sheller")
+        print("[+] Setting up sheller")
+        system("ln -s /usr/bin/sheller/bin/sheller /usr/local/bin")
+        print("[+] Done, you can now use sheller from anywhere! Just type 'sheller'")
     else:
         pass
     if args.ip:
