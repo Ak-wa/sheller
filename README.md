@@ -32,7 +32,3 @@ sheller -d 10.10.14.13 -p 4444
 ![follow](https://img.shields.io/github/followers/ak-wa.svg?label=Follow&style=social)
 
 ![](sheller.gif)  
-
-  
-* Supports alias, after "python3 sheller.py -alias" you can run it from any directory  
-![](sheller_alias.gif)
